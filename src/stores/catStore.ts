@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import { immer } from "zustand/middleware/immer";
 import { createSelectors } from "../utils/createSelectors";
-import { devtools } from "zustand/middleware";
+import { devtools, persist, subscribeWithSelector } from "zustand/middleware";
 
 type TCatStoreState = {
   cats: {
@@ -17,24 +17,31 @@ export const useCatStore = createSelectors(
   create<TCatStoreState>()(
     immer(
       devtools(
-        (set, get) => ({
-          cats: {
-            bigCats: 0,
-            smallCats: 0,
-          },
-          increaseBigCats: () =>
-            set((state) => {
-              state.cats.bigCats++;
+        subscribeWithSelector(
+          persist(
+            (set, get) => ({
+              cats: {
+                bigCats: 0,
+                smallCats: 0,
+              },
+              increaseBigCats: () =>
+                set((state) => {
+                  state.cats.bigCats++;
+                }),
+              increaseSmallCats: () =>
+                set((state) => {
+                  state.cats.smallCats++;
+                }),
+              summary: () => {
+                const total = get().cats.bigCats + get().cats.smallCats;
+                return `There are ${total} cats in total. `;
+              },
             }),
-          increaseSmallCats: () =>
-            set((state) => {
-              state.cats.smallCats++;
-            }),
-          summary: () => {
-            const total = get().cats.bigCats + get().cats.smallCats;
-            return `There are ${total} cats in total. `;
-          },
-        }),
+            {
+              name: "cat store",
+            }
+          )
+        ),
         {
           enabled: true,
           name: "cat store",
