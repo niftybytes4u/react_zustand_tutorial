@@ -1,4 +1,3 @@
-import React from "react";
 import { useCatStore } from "../stores/catStore";
 
 export const CatBox = () => {
