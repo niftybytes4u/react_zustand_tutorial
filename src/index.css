@@ -1,0 +1,46 @@
+.container {
+  max-width: 1200px;
+  padding: 1rem;
+  margin: 0 auto;
+}
+
+.container > div {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: stretch;
+  margin: 1rem 0;
+  gap: 1rem;
+}
+
+.container > h1{
+  text-align: center;
+  margin: 1rem 0;
+}
+
+.box{
+  flex-grow: 1;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  border: 1px solid lightgrey;
+  
+}
+
+button{  
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  border: none;
+  background-color: mediumseagreen;
+  color: white;
+  font-size: 1rem;
+  cursor: pointer; 
+  margin: 0.5rem;
+}
+
+
+button:hover{
+  background-color: darkgreen;
+}
+
+
+
+
