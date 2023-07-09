@@ -13,6 +13,9 @@ export const BearBox = () => {
       <div>
         <button onClick={increasePopulation}>add bear</button>
         <button onClick={removeAllBears}>remove all bears</button>
+        <button onClick={useBearStore.persist.clearStorage}>
+          clear storage
+        </button>
       </div>
     </div>
   );
